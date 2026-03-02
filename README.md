@@ -24,7 +24,7 @@ Pixel Playground is a browser-based arcade collection featuring classic and mode
 ✔ No frameworks  
 ✔ Fully Responsive  
 ✔ Beginner Friendly  
-
+  <img src="https://img.shields.io/badge/Games-30+-green?style=for-the-badge"/>
 ---
 
 ## 🎮 Games & Live Demo
@@ -47,14 +47,7 @@ Pixel Playground is a browser-based arcade collection featuring classic and mode
   <img src="https://skillicons.dev/icons?i=js" height="40" alt="JavaScript"/>
   <img src="https://skillicons.dev/icons?i=github" height="40" alt="GitHub"/>
   <img src="https://skillicons.dev/icons?i=vscode" height="40" alt="VS Code"/>
-    <img src="https://img.shields.io/badge/Games-30+-green?style=for-the-badge"/>
 </p>
-
----
-
-## 👨‍💻 Author
-
-Developed with ❤️ by Rishabh Shah
 
 ---
 
