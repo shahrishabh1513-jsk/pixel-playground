@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BREAKOUT ELITE | Modern Arcade Game</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="image/Rweblogo.png">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="gradient-bg">
+        <div class="gradient-1"></div>
+        <div class="gradient-2"></div>
+        <div class="gradient-3"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <div class="logo">
+                <i class="fas fa-cube"></i>
+                <h1>BREAKOUT <span>ELITE</span></h1>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <div class="stat-info">
+                        <span class="stat-label">Score</span>
+                        <span class="stat-value" id="score">0</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-heart"></i>
+                    <div class="stat-info">
+                        <span class="stat-label">Lives</span>
+                        <span class="stat-value" id="lives">3</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <div class="stat-info">
+                        <span class="stat-label">Level</span>
+                        <span class="stat-value" id="level">1</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Game Area -->
+        <div class="game-area">
+            <!-- Canvas -->
+            <canvas id="canvas"></canvas>
+            
+            <!-- Overlay Elements -->
+            <div class="game-overlay" id="gameOverlay">
+                <div class="overlay-content">
+                    <h2 id="overlayTitle">PAUSED</h2>
+                    <p id="overlayMessage">Press SPACE to continue</p>
+                    <div class="overlay-buttons">
+                        <button class="overlay-btn" id="restartBtn"><i class="fas fa-redo-alt"></i> Restart</button>
+                        <button class="overlay-btn" id="menuBtn"><i class="fas fa-home"></i> Menu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <button class="control-btn" id="rulesBtn"><i class="fas fa-book-open"></i> Rules</button>
+            
+            <div class="power-ups" id="powerUps">
+                <div class="power-up" data-power="wide">
+                    <i class="fas fa-arrows-alt-h"></i>
+                    <span>Wide Paddle</span>
+                </div>
+                <div class="power-up" data-power="slow">
+                    <i class="fas fa-clock"></i>
+                    <span>Slow Motion</span>
+                </div>
+                <div class="power-up" data-power="multi">
+                    <i class="fas fa-copy"></i>
+                    <span>Multi Ball</span>
+                </div>
+            </div>
+            
+            <button class="control-btn" id="soundBtn"><i class="fas fa-volume-up"></i> Sound</button>
+        </div>
+
+        <!-- Rules Modal -->
+        <div class="modal" id="rulesModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-gamepad"></i> How to Play</h2>
+                    <button class="modal-close" id="closeRulesBtn"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="rule-section">
+                        <h3><i class="fas fa-arrows-alt"></i> Controls</h3>
+                        <div class="control-grid">
+                            <div class="control-item">
+                                <kbd>←</kbd>
+                                <span>Move Left</span>
+                            </div>
+                            <div class="control-item">
+                                <kbd>→</kbd>
+                                <span>Move Right</span>
+                            </div>
+                            <div class="control-item">
+                                <kbd>SPACE</kbd>
+                                <span>Pause/Resume</span>
+                            </div>
+                            <div class="control-item">
+                                <kbd>R</kbd>
+                                <span>Restart</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rule-section">
+                        <h3><i class="fas fa-bolt"></i> Power-Ups</h3>
+                        <div class="power-grid">
+                            <div class="power-item">
+                                <div class="power-icon wide"></div>
+                                <span>Wide Paddle - Larger paddle for 10 seconds</span>
+                            </div>
+                            <div class="power-item">
+                                <div class="power-icon slow"></div>
+                                <span>Slow Motion - Ball slows down for 5 seconds</span>
+                            </div>
+                            <div class="power-item">
+                                <div class="power-icon multi"></div>
+                                <span>Multi Ball - Three balls for 8 seconds</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rule-section">
+                        <h3><i class="fas fa-trophy"></i> Scoring</h3>
+                        <ul class="scoring-list">
+                            <li><span class="score-badge">10</span> Normal Brick</li>
+                            <li><span class="score-badge">20</span> Power-up Brick</li>
+                            <li><span class="score-badge">50</span> Complete Level</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Typing Master | Test Your Typing Speed</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="./image/Rweblogo.png">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-keyboard"></i>
+                <h1>SpeedTyping<span>.Master</span></h1>
+            </div>
+            <div class="stats-preview">
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <span class="stat-label">Time</span>
+                        <span class="stat-value" id="timer">0s</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <div>
+                        <span class="stat-label">WPM</span>
+                        <span class="stat-value" id="wpm">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <span class="stat-label">Accuracy</span>
+                        <span class="stat-value" id="accuracy">100%</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Game Settings Panel -->
+        <div class="settings-panel">
+            <div class="settings-group">
+                <label for="category"><i class="fas fa-book-open"></i> Category</label>
+                <select id="category" class="settings-select">
+                    <option value="mixed">🌟 Mixed (All Categories)</option>
+                    <option value="technology">💻 Technology</option>
+                    <option value="motivational">🚀 Motivational</option>
+                    <option value="programming">👨‍💻 Programming</option>
+                    <option value="science">🔬 Science</option>
+                    <option value="literature">📚 Literature</option>
+                    <option value="philosophy">🧠 Philosophy</option>
+                </select>
+            </div>
+            
+            <div class="settings-group">
+                <label for="difficulty"><i class="fas fa-chart-line"></i> Difficulty</label>
+                <div class="difficulty-buttons">
+                    <button class="difficulty-btn active" data-difficulty="easy">Easy</button>
+                    <button class="difficulty-btn" data-difficulty="medium">Medium</button>
+                    <button class="difficulty-btn" data-difficulty="hard">Hard</button>
+                </div>
+            </div>
+            
+            <button class="new-quote-btn" id="newQuoteBtn">
+                <i class="fas fa-sync-alt"></i> New Quote
+            </button>
+        </div>
+
+        <!-- Main Game Area -->
+        <main class="game-area">
+            <!-- Quote Display -->
+            <div class="quote-container">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <div class="quote-display" id="quoteDisplay"></div>
+            </div>
+
+            <!-- Typing Input -->
+            <div class="input-container">
+                <textarea 
+                    class="quote-input" 
+                    id="quoteInput" 
+                    placeholder="Start typing here..."
+                    autofocus
+                ></textarea>
+                <div class="input-footer">
+                    <div class="progress-indicator">
+                        <span id="typedCount">0</span>/<span id="totalChars">0</span> characters
+                    </div>
+                    <button class="reset-btn" id="resetBtn">
+                        <i class="fas fa-undo-alt"></i> Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Modal (Hidden by default) -->
+            <div class="results-modal" id="resultsModal">
+                <div class="results-content">
+                    <h2><i class="fas fa-trophy"></i> Test Complete!</h2>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <span class="result-label">Time</span>
+                            <span class="result-value" id="resultTime">0s</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">WPM</span>
+                            <span class="result-value" id="resultWPM">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Accuracy</span>
+                            <span class="result-value" id="resultAccuracy">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Characters</span>
+                            <span class="result-value" id="resultChars">0/0</span>
+                        </div>
+                    </div>
+                    <button class="try-again-btn" id="tryAgainBtn">
+                        <i class="fas fa-redo-alt"></i> Try Again
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Keyboard Shortcuts Hint -->
+        <footer class="footer">
+            <div class="shortcuts">
+                <span><i class="fas fa-keyboard"></i> Press <kbd>Tab</kbd> to focus</span>
+                <span><i class="fas fa-enter"></i> Press <kbd>Enter</kbd> to submit</span>
+                <span><i class="fas fa-escape"></i> Press <kbd>Esc</kbd> to reset</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>

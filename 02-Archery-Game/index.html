@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎯 Archery Master | Precision Shooting</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="./image/Rweblogo.png">
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-gradient"></div>
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <!-- Main Game Container -->
+  <div class="game-wrapper">
+    <!-- Header with Score and Stats -->
+    <div class="game-header">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <div class="logo-text">
+          <h1>ARCHERY<span>MASTER</span></h1>
+          <p>Precision Shooting</p>
+        </div>
+      </div>
+
+      <div class="stats-area">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-crosshairs"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-label">Accuracy</span>
+            <span class="stat-value" id="accuracy">0%</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-label">Bullseyes</span>
+            <span class="stat-value" id="bullseyeCount">0</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-label">Shots</span>
+            <span class="stat-value" id="shotCount">0</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="reset-btn" id="resetGame">
+        <i class="fas fa-redo-alt"></i>
+        <span>New Round</span>
+      </button>
+    </div>
+
+    <!-- Game Canvas Container -->
+    <div class="game-container">
+      <!-- Instruction Badge -->
+      <div class="instruction-badge" id="instruction">
+        <div class="badge-content">
+          <i class="fas fa-mouse-pointer"></i>
+          <span>Draw back an arrow and launch it!</span>
+          <i class="fas fa-arrow-left"></i>
+          <i class="fas fa-arrow-right"></i>
+        </div>
+      </div>
+
+      <!-- Target Range Indicator -->
+      <div class="range-indicator">
+        <div class="indicator-line"></div>
+        <span>TARGET RANGE</span>
+        <div class="indicator-line"></div>
+      </div>
+
+      <!-- SVG Game -->
+      <svg id="game" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" overflow="visible">
+        <defs>
+          <!-- Gradients -->
+          <linearGradient id="ArcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff6b6b" stop-opacity=".8"/>
+            <stop offset="50%" stop-color="#4ecdc4" stop-opacity=".8"/>
+            <stop offset="100%" stop-color="#45b7d1" stop-opacity=".8"/>
+          </linearGradient>
+          
+          <linearGradient id="bowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ffd93d"/>
+            <stop offset="100%" stop-color="#ff9f1c"/>
+          </linearGradient>
+          
+          <radialGradient id="targetGlow">
+            <stop offset="0%" stop-color="#ff6b6b" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#ff6b6b" stop-opacity="0"/>
+          </radialGradient>
+          
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          
+          <filter id="shadow">
+            <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+          </filter>
+
+          <!-- Arrow Definition -->
+          <g id="arrow">
+            <line x2="60" fill="none" stroke="#fff" stroke-width="3" filter="url(#shadow)"/>
+            <polygon fill="#ffd93d" points="64 0 58 2 56 0 58 -2" filter="url(#shadow)"/>
+            <polygon fill="#ff6b6b" points="2 -3 -4 -3 -1 0 -4 3 2 3 5 0" filter="url(#shadow)">
+              <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
+            </polygon>
+          </g>
+        </defs>
+
+        <!-- Enhanced Arc Path -->
+        <path id="arc" fill="none" stroke="url(#ArcGradient)" stroke-width="4" stroke-dasharray="8 8" 
+              d="M100,250c250-400,550-400,800,0" pointer-events="none" filter="url(#glow)">
+          <animate attributeName="stroke-dashoffset" values="0;32" dur="2s" repeatCount="indefinite"/>
+        </path>
+
+        <!-- Enhanced Target -->
+        <g id="target" filter="url(#glow)">
+          <!-- Glow effect -->
+          <circle cx="924.2" cy="274.2" r="55" fill="url(#targetGlow)" opacity="0.3"/>
+          
+          <!-- Target rings -->
+          <path fill="#FFF" d="M924.2,274.2c-21.5,21.5-45.9,19.9-52,3.2c-4.4-12.1,2.4-29.2,14.2-41c11.8-11.8,29-18.6,41-14.2 C944.1,228.3,945.7,252.8,924.2,274.2z">
+            <animate attributeName="opacity" values="0.9;1;0.9" dur="2s" repeatCount="indefinite"/>
+          </path>
+          
+          <path fill="#F4531C" d="M915.8,265.8c-14.1,14.1-30.8,14.6-36,4.1c-4.1-8.3,0.5-21.3,9.7-30.5s22.2-13.8,30.5-9.7 C930.4,235,929.9,251.7,915.8,265.8z"/>
+          
+          <path fill="#FFF" d="M908.9,258.9c-8,8-17.9,9.2-21.6,3.5c-3.2-4.9-0.5-13.4,5.6-19.5c6.1-6.1,14.6-8.8,19.5-5.6 C918.1,241,916.9,250.9,908.9,258.9z"/>
+          
+          <!-- Bullseye with pulse -->
+          <circle cx="903.2" cy="253.2" r="5" fill="#F4531C">
+            <animate attributeName="r" values="4;6;4" dur="1s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.8;1;0.8" dur="1s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+
+        <!-- Enhanced Bow -->
+        <g id="bow" filter="url(#shadow)">
+          <polyline fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" 
+                   points="88,200 88,250 88,300"/>
+          <path fill="none" stroke="url(#bowGradient)" stroke-width="4" stroke-linecap="round" 
+                d="M88,300 c0-10.1,12-25.1,12-50s-12-39.9-12-50"/>
+        </g>
+
+        <!-- Current Arrow -->
+        <g class="arrow-angle">
+          <use x="100" y="250" xlink:href="#arrow"/>
+        </g>
+
+        <!-- Clip Path for Arrows -->
+        <clipPath id="mask">
+          <polygon points="0,0 1500,0 1500,200 970,290 950,240 925,220 875,280 890,295 920,310 0,350"/>
+        </clipPath>
+
+        <!-- Arrows Container -->
+        <g class="arrows" clip-path="url(#mask)"></g>
+
+        <!-- Hit/Miss Messages (Enhanced) -->
+        <g class="message miss" opacity="0" transform="translate(400, 150)">
+          <text fill="#ff6b6b" font-size="32" font-weight="800" font-family="Poppins" text-anchor="middle" filter="url(#glow)">MISS</text>
+        </g>
+        
+        <g class="message hit" opacity="0" transform="translate(400, 150)">
+          <text fill="#4ecdc4" font-size="32" font-weight="800" font-family="Poppins" text-anchor="middle" filter="url(#glow)">HIT</text>
+        </g>
+        
+        <g class="message bullseye" opacity="0" transform="translate(400, 150)">
+          <text fill="#ffd93d" font-size="40" font-weight="900" font-family="Poppins" text-anchor="middle" filter="url(#glow)">🎯 BULLSEYE! 🎯</text>
+        </g>
+
+        <!-- Original hit/miss graphics (kept for compatibility) -->
+        <g class="miss-graphics" fill="#aaa" opacity="0" transform="translate(0, 100)">
+          <path d="M358 194L363 118 386 120 400 153 416 121 440 119 446 203 419 212 416 163 401 180 380 160 381 204"/>
+          <path d="M450 120L458 200 475 192 474 121"/>
+          <path d="M537 118L487 118 485 160 515 162 509 177 482 171 482 193 529 199 538 148 501 146 508 133 537 137"/>
+        </g>
+
+        <g class="bullseye-graphics" fill="#F4531C" opacity="0">
+          <path d="M322,159l15-21l-27-13l-32,13l15,71l41-14l7-32L322,159z M292,142h20l3,8l-16,8 L292,142z M321,182l-18,9l-4-18l23-2V182z"/>
+        </g>
+
+        <g class="hit-graphics" fill="#ffcc00" opacity="0" transform="translate(180, -80) rotate(12)">
+          <path d="M383 114L385 195 407 191 406 160 422 155 418 191 436 189 444 112 423 119 422 141 407 146 400 113"/>
+        </g>
+      </svg>
+
+      <!-- Power Meter -->
+      <div class="power-meter" id="powerMeter">
+        <div class="power-label">PULL STRENGTH</div>
+        <div class="meter-bar">
+          <div class="meter-fill" id="meterFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Controls -->
+    <div class="game-footer">
+      <div class="footer-left">
+        <div class="key-hint">
+          <i class="fas fa-mouse"></i>
+          <span>Click & Drag</span>
+        </div>
+        <div class="key-hint">
+          <i class="fas fa-hand-pointer"></i>
+          <span>Release to Shoot</span>
+        </div>
+      </div>
+      
+      <div class="footer-right">
+        <button class="sound-toggle" id="soundToggle">
+          <i class="fas fa-volume-up"></i>
+        </button>
+        <button class="info-btn" id="infoBtn">
+          <i class="fas fa-info-circle"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js'></script>
+  <script src='//s3-us-west-2.amazonaws.com/s.cdpn.io/16327/MorphSVGPlugin.min.js'></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

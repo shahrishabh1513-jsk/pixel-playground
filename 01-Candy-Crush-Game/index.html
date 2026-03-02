@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candy Crush Saga | Modern Edition</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="./image/Rweblogo.png">
+</head>
+<body>
+  <div class="game-wrapper">
+    <!-- Mode Selection Screen -->
+    <div id="modeSelection" class="mode-selection">
+      <div class="mode-card">
+        <h1 class="game-title">Candy Crush</h1>
+        <p class="game-subtitle">Choose your adventure</p>
+        <div class="mode-buttons">
+          <button id="endlessMode" class="mode-btn endless">
+            <i class="fas fa-infinity"></i>
+            <span>Endless Mode</span>
+          </button>
+          <button id="timedMode" class="mode-btn timed">
+            <i class="fas fa-hourglass-half"></i>
+            <span>Timed Mode</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Game Screen -->
+    <div class="game-container">
+      <!-- Header with Score and Timer -->
+      <div class="game-header">
+        <div class="logo">
+          <i class="fas fa-candy-cane"></i>
+          <span>Candy Crush</span>
+        </div>
+        
+        <div class="stats-container">
+          <div class="stat-card score-card">
+            <i class="fas fa-star"></i>
+            <div class="stat-info">
+              <span class="stat-label">Score</span>
+              <span id="score" class="stat-value">0</span>
+            </div>
+          </div>
+          
+          <div class="stat-card timer-card" id="timerContainer">
+            <i class="fas fa-clock"></i>
+            <div class="stat-info">
+              <span class="stat-label">Time</span>
+              <span id="timer" class="stat-value">--:--</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="changeMode" class="change-mode-btn">
+          <i class="fas fa-exchange-alt"></i>
+          <span>Change Mode</span>
+        </button>
+      </div>
+
+      <!-- Game Grid -->
+      <div class="grid"></div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
